@@ -5,12 +5,33 @@ Statični web (HTML/CSS/JS, bez ovisnosti) s istim sadržajem kao ma-no.hr i nov
 ## Pokretanje
 
 ```bash
-npm run dev     # izgradi dist/ i posluži na http://localhost:4321, ponovno gradi na svaku promjenu
-npm run build   # samo izgradi dist/ za objavu
+npm run dev          # izgradi dist/ i posluži na http://localhost:4321, ponovno gradi na svaku promjenu
+npm run build        # samo izgradi dist/ za objavu na ma-no.hr
+npm run dev:demo     # demo kao na GitHub Pagesu: dist-demo/ na http://localhost:4322/ma-no/
+npm run build:demo   # samo izgradi dist-demo/
 ```
 
 Za objavu se kopira sadržaj mape `dist/` na hosting. URL-ovi su isti kao na starom webu
 (`/usluge/`, `/kontakt/`, `/popravak-auta-od-tuce/` …), pa postojeći linkovi i Google rezultati i dalje rade.
+
+## Demo za klijenta – GitHub Pages
+
+Svaki push na `main` pokreće `.github/workflows/deploy-pages.yml`: `npm run build:demo` pa objava mape `dist-demo/`
+na **https://tsimunic.github.io/ma-no/** (2–4 minute, napredak u kartici Actions).
+
+- Ciljevi builda su u `TARGETS` u `build.mjs`. Demo živi na podadresi `/ma-no/`, pa build svim lokalnim poveznicama
+  u HTML-u (`href="/…"`, `src="/…"`) doda taj prefiks. Putanje u CSS-u i JS-u zato moraju biti relativne.
+- Demo ima `<meta name="robots" content="noindex, nofollow">` na svim stranicama i nema `sitemap.xml` ni `robots.txt`.
+  Kanonske adrese i pregled linka (`og:url`, `og:image`) pokazuju na demo adresu.
+- `src/pages/404.html` (`"path": "/404.html"`) GitHub Pages vraća za svaku nepostojeću adresu.
+- Jednokratno na GitHubu: Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+- `dist/` i `dist-demo/` nisu u repozitoriju (`.gitignore`); Actions gradi sam.
+- Na `npm run dev:demo` (localhost:4322) tAInica kalendar i chatbot vraćaju 403, jer ta adresa nije među dopuštenima
+  u tAInici. Na `https://tsimunic.github.io` i `http://localhost:4321` rade.
+
+Za prelazak na ma-no.hr: u workflowu `npm run build:demo` → `npm run build`, a `path: dist-demo` → `path: dist`.
+Domenu postaviti u Settings → Pages → Custom domain i kod registra (A/AAAA zapisi za GitHub Pages, MX ne dirati).
+Prije toga tAInica kalendar i chatbot prebaciti na produkcijske adrese i dopustiti `https://ma-no.hr`.
 
 ## Struktura
 

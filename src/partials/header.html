@@ -1,0 +1,61 @@
+<a class="skip-link" href="#main">Preskoči na sadržaj</a>
+<header class="site-header" data-header>
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="MA-NO Car Repairs, naslovna">
+      <img class="brand-mark" src="/assets/img/ma-no-znak.svg" width="36" height="35" alt="">
+      <span class="brand-name">MA-NO <small>Car Repairs</small></span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Glavna navigacija">
+      <canvas class="board nav-board" data-board="menu" aria-hidden="true"></canvas>
+      <ul class="nav-list">
+        <li><a class="nav-link" href="/" data-nav="naslovna">Naslovna</a></li>
+        <li class="nav-has-sub">
+          <a class="nav-link" href="/usluge/" data-nav="usluge">Usluge</a>
+          <div class="nav-sub">
+            <ul class="nav-sub-list" aria-label="Usluge">
+              <li><a class="nav-sub-link" href="/popravak-auta-od-tuce/" data-nav="tuca">
+                <img src="/assets/img/izbornik/tuca.jpg" width="360" height="240" alt="" loading="lazy">
+                <span><strong>Popravak auta od tuče</strong><small>Hauba, krov, vrata i blatobrani nakon nevremena</small></span>
+              </a></li>
+              <li><a class="nav-sub-link" href="/parking-udubljenja-udarci-vratima/" data-nav="parking">
+                <img src="/assets/img/izbornik/parking.jpg" width="360" height="240" alt="" loading="lazy">
+                <span><strong>Parking udubljenja i udarci vratima</strong><small>Vrata, kolica i odbojnici, često gotovo za par sati</small></span>
+              </a></li>
+              <li><a class="nav-sub-link" href="/popravak-kasko-osiguranje/" data-nav="kasko">
+                <img src="/assets/img/izbornik/kasko.jpg" width="360" height="240" alt="" loading="lazy">
+                <span><strong>Popravak preko osiguranja i kaska</strong><small>Od prijave štete do predaje vozila</small></span>
+              </a></li>
+            </ul>
+            <a class="nav-sub-all" href="/usluge/">Sve usluge i postupak popravka</a>
+          </div>
+        </li>
+        <li><a class="nav-link" href="/o-nama/" data-nav="o-nama">O nama</a></li>
+        <li><a class="nav-link" href="/pdr-akademija/" data-nav="akademija">PDR akademija</a></li>
+        <li><a class="nav-link" href="/galerija/" data-nav="galerija">Galerija</a></li>
+        <li><a class="nav-link" href="/kontakt/" data-nav="kontakt">Kontakt</a></li>
+      </ul>
+      <div class="nav-mobile-cta">
+        <p class="open-status" data-open-status>Pon–pet, 8–16 h</p>
+        <a class="btn btn-red" href="{{booking}}" data-nav="rezervacija">Rezerviraj termin</a>
+        <a class="btn btn-line-light" href="tel:+385981659925">Nazovi 098 165 9925</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+385981659925">
+        <span class="open-status" data-open-status="short">Pon–pet, 8–16 h</span>
+        <span class="header-phone-num">098 165 9925</span>
+      </a>
+      <a class="header-call" href="tel:+385981659925" aria-label="Nazovi 098 165 9925">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      </a>
+      <a class="btn btn-red btn-sm header-book" href="{{booking}}" data-nav="rezervacija">Rezerviraj termin</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-btn-lines" aria-hidden="true"></span>
+        <span class="visually-hidden">Izbornik</span>
+      </button>
+    </div>
+  </div>
+  <span class="nav-glow" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M0 6 Q50 6 100 6"/></svg></span>
+</header>

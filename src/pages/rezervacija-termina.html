@@ -1,0 +1,37 @@
+<!--
+{
+  "title": "Rezervacija termina – besplatna procjena udubljenja - MA-NO Car Repairs",
+  "description": "Odaberite slobodan termin za besplatnu procjenu udubljenja u MA-NO Car Repairs. Z Centar, podzemna garaža -1, Ljubljanska avenija 2b, Zagreb.",
+  "path": "/rezervacija-termina/",
+  "nav": "rezervacija",
+  "bodyClass": "page-booking",
+  "hideCta": true
+}
+-->
+<section class="page-hero page-hero--compact">
+  <canvas class="board" data-board="page" data-dents="rezervacija" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Putanja"><ol><li><a href="/">Naslovna</a></li><li><span aria-current="page">Rezervacija termina</span></li></ol></nav>
+    <h1>Rezervacija termina</h1>
+    <p class="page-hero-lead">Odaberite dan i slobodan termin za besplatnu procjenu. Nalazimo se u podzemnoj garaži Z Centra, Ljubljanska avenija 2b, Zagreb.</p>
+  </div>
+</section>
+
+<section class="booking-section" aria-label="Kalendar za rezervaciju termina">
+  <div class="wrap">
+    <!-- tAInica widget za rezervacije, način "cijela stranica" -->
+    <div id="tainica-rezervacija"></div>
+    <script
+      defer
+      src="https://dev-widget.tainica.hr/v1/widget.js"
+      data-widget-id="ba05bdc0-1818-495b-8aaa-cf6cfc71ab1b"
+      data-widget-origin="https://dev-widget.tainica.hr"
+      data-gateway="https://tainica-gateway-demo.up.railway.app"
+      data-embed="page"
+      data-target="tainica-rezervacija"
+      data-layout="month_view"
+    ></script>
+
+    <p class="booking-help">Ne vidite kalendar ili vam ne odgovara nijedan termin? Nazovite <a href="tel:+385981659925">098 165 9925</a> ili pišite na <a href="mailto:info@ma-no.hr">info@ma-no.hr</a>. Radimo od ponedjeljka do petka, 8–16 h.</p>
+  </div>
+</section>

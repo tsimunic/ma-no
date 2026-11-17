@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="hr" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">{{robots}}
+  <link rel="canonical" href="{{canonical}}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="hr_HR">
+  <meta property="og:site_name" content="MA-NO Car Repairs">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:image" content="{{site}}/assets/img/slide-1.webp">
+  <meta name="theme-color" content="#0F1520">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v={{iconV}}">
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg?v={{iconV}}">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v={{iconV}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  {{jsonld}}
+</head>
+<body class="{{bodyClass}}">
+{{> header}}
+<main id="main">
+{{content}}
+</main>
+{{ctaBand}}
+{{> footer}}
+<script src="/assets/js/main.js" defer></script>
+<!-- tAInica chatbot: plutajući gumb. data-position ima prednost pred položajem zadanim u aplikaciji tAInica.
+     defer: vanjska skripta ne smije blokirati parsiranje stranice ni pokretanje main.js -->
+<script
+  defer
+  src="https://dev-widget.tainica.hr/v1/widget.js"
+  data-widget-id="423cff18-7efb-478b-8f99-eba0abe4edc6"
+  data-widget-origin="https://dev-widget.tainica.hr"
+  data-gateway="https://tainica-gateway-demo.up.railway.app"
+  data-position="bottom-right"
+></script>
+</body>
+</html>

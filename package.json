@@ -1,0 +1,16 @@
+{
+  "name": "ma-no-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Novi web za MA-NO Car Repairs (PDR popravak udubljenja bez lakiranja, Zagreb)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "build:demo": "node build.mjs --demo",
+    "dev": "node serve.mjs",
+    "dev:demo": "node serve.mjs --demo"
+  }
+}

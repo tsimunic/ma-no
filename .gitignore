@@ -1,0 +1,6 @@
+# build (dist/, dist-demo/) i ostaci prekinutih buildova (dist.tmp-*, dist-demo.old-* …);
+# GitHub Actions gradi web sam, pa ništa od toga ne ide u repozitorij
+/dist*/
+
+node_modules/
+.claude/settings.local.json
