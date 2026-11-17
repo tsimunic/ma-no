@@ -527,21 +527,114 @@ h3 { font-size: var(--fs-h3); font-stretch: 108%; font-weight: 700; line-height:
 @media (max-width: 560px) { .reasons { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
 
 /* ---------- recenzije ---------- */
-.reviews { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 40px; }
-.review { margin: 0; border-top: 1px solid var(--linija); padding-top: 24px; display: flex; flex-direction: column; }
-.review blockquote { margin: 0 0 20px; font-size: 1.0625rem; line-height: 1.6; }
-.review blockquote p { margin: 0; }
-.review figcaption { margin-top: auto; font-weight: 650; }
-.review figcaption span { display: block; font-weight: 400; color: var(--celik); font-size: var(--fs-small); }
-.reviews > li { display: flex; }
-.reviews > li > .review { flex: 1; }
-.reviews > li:first-child { grid-column: span 2; }
-.review--lead { border-top: 2px solid var(--crvena); }
-.review--lead blockquote { font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); line-height: 1.45; font-stretch: 104%; letter-spacing: -0.005em; }
-@media (max-width: 960px) { .reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) {
-  .reviews { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .reviews > li:first-child { grid-column: auto; }
+/* jedna recenzija u prvom planu (istaknuta rečenica, cijeli tekst, što je popravljeno, poveznica na uslugu)
+   i popis svih kupaca sa strane; na mobitelu se lista prstom ili strelicama */
+.reviews-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; margin-bottom: clamp(32px, 4vw, 56px); }
+.reviews-head h2 { max-width: 16ch; }
+.reviews-nav { display: flex; align-items: center; gap: 10px; }
+.reviews-arrow {
+  width: 48px; height: 48px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.3); background: none; color: #fff;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.reviews-arrow:hover { border-color: #fff; }
+.reviews-arrow:active { background: rgba(255, 255, 255, 0.12); transform: translateY(1px); }
+.reviews-count { min-width: 5ch; text-align: center; font-variant-numeric: tabular-nums; color: var(--celik-svj); font-weight: 600; }
+.reviews-count b { color: #fff; font-weight: 700; }
+
+.reviews-stage { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: stretch; }
+.reviews-panels {
+  --card-pad: clamp(24px, 3.6vw, 48px);
+  position: relative; overflow: hidden; isolation: isolate;
+  display: grid; grid-template-rows: auto 1fr;
+  padding: var(--card-pad); border-radius: var(--r-md);
+  background: var(--lak-2); border: 1px solid var(--linija-tamna);
+  touch-action: pan-y;
+}
+.reviews-panels > .card-board { grid-row: 1; margin-bottom: 8px; }
+/* stara recenzija brzo nestane, nova se pojavi tek nakon nje, da se tekstovi ne preklapaju */
+.review-panel {
+  grid-row: 2; grid-column: 1; display: flex; flex-direction: column; min-width: 0;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+}
+.review-panel.is-active { transition: opacity 0.32s ease 0.14s, transform 0.32s ease 0.14s, visibility 0s; }
+.js .review-panel:not(.is-active) { opacity: 0; visibility: hidden; transform: translateY(10px); }
+.review-pull {
+  margin: 0 0 22px; max-width: 30ch; color: #fff;
+  font-size: clamp(1.5rem, 1.05rem + 1.8vw, 2.5rem); font-weight: 700; font-stretch: 112%;
+  line-height: 1.16; letter-spacing: -0.012em; text-wrap: balance;
+}
+.review-full { margin: 0 0 28px; max-width: 62ch; color: #C9D1DC; font-size: 1.0625rem; line-height: 1.6; }
+.review-full p { margin: 0; }
+.review-meta {
+  margin-top: auto; padding-top: 20px; border-top: 1px solid var(--linija-tamna);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px;
+}
+.review-person { margin: 0; display: flex; align-items: center; gap: 12px; }
+.review-initials {
+  flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--crvena); color: #fff; font-weight: 750; font-stretch: 115%; font-size: 0.9375rem; letter-spacing: 0.02em;
+}
+.review-name { display: block; font-weight: 650; color: #fff; }
+.review-role { display: block; font-size: var(--fs-small); color: var(--celik-svj); }
+.review-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.review-tags li { padding: 4px 11px; border-radius: 999px; border: 1px solid var(--linija-tamna); font-size: 0.8125rem; color: #D5DBE4; }
+.review-link { margin-left: auto; }
+
+.reviews-side { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.reviews-list { display: flex; flex-direction: column; gap: 6px; }
+.reviews-cta { margin-top: auto; padding: 22px 0 0 16px; border-top: 1px solid var(--linija-tamna); }
+.reviews-cta p { margin: 0 0 16px; color: #C9D1DC; font-size: 0.9875rem; max-width: 36ch; }
+.reviews-tab {
+  position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: center;
+  width: 100%; padding: 14px 16px; text-align: left; cursor: pointer;
+  border: 1px solid transparent; border-radius: var(--r-md); background: none; color: var(--celik-svj);
+  font: inherit; transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.rt-initials {
+  grid-row: 1 / span 2; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--linija-tamna); color: #D5DBE4; font-weight: 700; font-stretch: 112%; font-size: 0.8125rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.rt-name { font-weight: 650; color: #E6EAF0; line-height: 1.3; }
+.rt-topic { font-size: 0.875rem; line-height: 1.35; }
+.reviews-tab:hover { background: rgba(255, 255, 255, 0.04); }
+.reviews-tab:active { background: rgba(255, 255, 255, 0.08); }
+.reviews-tab[aria-selected="true"] { background: var(--lak-2); border-color: var(--linija-tamna); color: #C9D1DC; }
+/* aktivnu recenziju označava svjetlosna crta, kao linija PDR svjetla */
+.reviews-tab[aria-selected="true"]::before {
+  content: ""; position: absolute; left: -1px; top: 14px; bottom: 14px; width: 3px; border-radius: 2px;
+  background: var(--svjetlo); box-shadow: 0 0 12px 2px rgba(255, 243, 220, 0.5);
+}
+.reviews-tab[aria-selected="true"] .rt-initials { background: var(--crvena); border-color: var(--crvena); color: #fff; }
+
+/* bez JavaScripta: sve recenzije jedna ispod druge */
+.no-js .reviews-nav, .no-js .reviews-list { display: none; }
+.no-js .reviews-cta { margin-top: 0; }
+.no-js .reviews-stage { grid-template-columns: minmax(0, 1fr); }
+.no-js .review-panel { grid-row: auto; }
+.no-js .review-panel + .review-panel { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--linija-tamna); }
+
+@media (max-width: 960px) {
+  .reviews-stage { grid-template-columns: minmax(0, 1fr); }
+  /* imena iznad recenzije, poziv na rezervaciju ispod nje */
+  .reviews-side { display: contents; }
+  .reviews-cta { order: 1; margin-top: 4px; padding: 0; border-top: 0; }
+  .reviews-list {
+    order: -1; flex-direction: row; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin-inline: calc(-1 * var(--gutter)); padding: 2px var(--gutter) 4px; scrollbar-width: none;
+  }
+  .reviews-list::-webkit-scrollbar { display: none; }
+  .reviews-tab { width: auto; flex: 0 0 auto; scroll-snap-align: start; grid-template-columns: 32px auto; column-gap: 10px; padding: 8px 14px 8px 8px; border-color: var(--linija-tamna); border-radius: 999px; }
+  .rt-initials { grid-row: auto; width: 32px; height: 32px; font-size: 0.75rem; }
+  .rt-topic { display: none; }
+  .rt-name { white-space: nowrap; }
+  .reviews-tab[aria-selected="true"]::before { display: none; }
+}
+@media (max-width: 560px) {
+  .reviews-head h2 { max-width: none; }
+  .review-link { margin-left: 0; }
+  .review-full { font-size: 1rem; }
 }
 
 /* ---------- česta pitanja ---------- */

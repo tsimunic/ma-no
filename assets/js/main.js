@@ -549,6 +549,61 @@
   }
   document.querySelectorAll('.ba').forEach(initCompare);
 
+  /* ---------- recenzije: jedna u prvom planu, popis kao kartice (tablist) ----------
+     Klik na ime, strelice, tipke strelica/Home/End i povlačenje prstom po recenziji. Bez automatskog listanja. */
+  document.querySelectorAll('[data-reviews]').forEach((root) => {
+    const tabs = [...root.querySelectorAll('[role="tab"]')];
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+    if (!tabs.length || panels.some((p) => !p)) return;
+    const list = root.querySelector('[role="tablist"]');
+    const count = root.querySelector('[data-reviews-count]');
+    let current = Math.max(0, tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true'));
+
+    const show = (i, focus) => {
+      current = (i + tabs.length) % tabs.length;
+      tabs.forEach((tab, k) => {
+        const on = k === current;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panels[k].classList.toggle('is-active', on);
+      });
+      if (count) count.innerHTML = `<b>${current + 1}</b> / ${tabs.length}`;
+      if (focus) tabs[current].focus({ preventScroll: true });
+      // na mobitelu je popis vodoravan: aktivno ime dovede se u vidno polje, bez pomicanja stranice
+      if (list && list.scrollWidth > list.clientWidth + 1) {
+        const tab = tabs[current];
+        const left = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
+        list.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+    };
+
+    tabs.forEach((tab, k) => tab.addEventListener('click', () => show(k)));
+    list?.addEventListener('keydown', (e) => {
+      const keys = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+      if (e.key in keys) show(current + keys[e.key], true);
+      else if (e.key === 'Home') show(0, true);
+      else if (e.key === 'End') show(tabs.length - 1, true);
+      else return;
+      e.preventDefault();
+    });
+    root.querySelector('[data-reviews-prev]')?.addEventListener('click', () => show(current - 1));
+    root.querySelector('[data-reviews-next]')?.addEventListener('click', () => show(current + 1));
+
+    const stage = root.querySelector('[data-reviews-panels]');
+    let start = null;
+    stage?.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') start = { x: e.clientX, y: e.clientY };
+    });
+    stage?.addEventListener('pointerup', (e) => {
+      if (!start) return;
+      const dx = e.clientX - start.x;
+      const dy = e.clientY - start.y;
+      start = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) show(current + (dx < 0 ? 1 : -1));
+    });
+    stage?.addEventListener('pointercancel', () => { start = null; });
+  });
+
   /* ---------- karta se učitava tek na klik ---------- */
   document.querySelectorAll('[data-map]').forEach((box) => {
     const btn = box.querySelector('[data-map-load]');

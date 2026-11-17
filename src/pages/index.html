@@ -85,43 +85,86 @@
   </div>
 </section>
 
-<section class="section section--zid" aria-labelledby="recenzije-title">
+<section class="section section--lak on-dark reviews-section" aria-labelledby="recenzije-title" data-reviews>
   <div class="wrap">
-    <div class="section-head section-head--stack">
+    <div class="reviews-head">
       <h2 id="recenzije-title">Što naši korisnici kažu o nama?</h2>
+      <div class="reviews-nav">
+        <button class="reviews-arrow" type="button" data-reviews-prev aria-label="Prethodna recenzija"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="reviews-count" data-reviews-count><b>1</b> / 5</span>
+        <button class="reviews-arrow" type="button" data-reviews-next aria-label="Sljedeća recenzija"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
     </div>
-    <ul class="reviews">
-      <li>
-        <figure class="review review--lead">
-          <blockquote><p>Komplet izudaran auto od tuče (najviše nastradao krov, hauba te bunker) gosp. Vlado je vratio u prvobitno stanje. Slike nažalost ne mogu dočarati dovoljno dobro kako je auto izgledao prije i poslije! Uglavnom perfektno odrađen posao, pedantno, uredno i čisto. Svaka preporuka!</p></blockquote>
-          <figcaption>Zoran Ažić <span>Vlasnik Mercedesa</span></figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="review">
-          <blockquote><p>Ostah zatečen kako se profesionalno odradilo udubljenje na svim vratima i na desnom zadnjem blatobranu. Svaka čast dečki, iznimno sam zadovoljan sa odrađenim. Preporučujem vas i dalje!</p></blockquote>
-          <figcaption>Den Blažević</figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="review">
-          <blockquote><p>Najbolja i najbrža usluga u Zaprešiću, Zagrebu, zasigurno i šire. Potpuna profesionalnost, ljubaznost, susretljivost. Automobil kao nov, 100% popravak. Svaka čast i samo naprijed dalje.</p></blockquote>
-          <figcaption>Siniša Panjević</figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="review">
-          <blockquote><p>Izuzetno korektan, ljubazan i profesionalan i ultra brz.. Svakako preporučam, i ako ću ikad išta radit, samo kod njega.</p></blockquote>
-          <figcaption>Tomislav Mravunac</figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="review">
-          <blockquote><p>Oduševljen obavljenim, sve pohvale! Dok su svi autolimar rekli ne, čovjek kaže da i to i ostvari, vrhunski!</p></blockquote>
-          <figcaption>Hrvoje Benić</figcaption>
-        </figure>
-      </li>
-    </ul>
+
+    <div class="reviews-stage">
+      <div class="reviews-panels" data-reviews-panels>
+        <canvas class="board card-board" data-board="strip" aria-hidden="true"></canvas>
+        <article class="review-panel is-active" id="recenzija-zoran" role="tabpanel" aria-labelledby="recenzija-tab-zoran">
+          <p class="review-pull">„Komplet izudaran auto od tuče (…) gosp. Vlado je vratio u prvobitno stanje.”</p>
+          <blockquote class="review-full"><p>Komplet izudaran auto od tuče (najviše nastradao krov, hauba te bunker) gosp. Vlado je vratio u prvobitno stanje. Slike nažalost ne mogu dočarati dovoljno dobro kako je auto izgledao prije i poslije! Uglavnom perfektno odrađen posao, pedantno, uredno i čisto. Svaka preporuka!</p></blockquote>
+          <div class="review-meta">
+            <p class="review-person"><span class="review-initials" aria-hidden="true">ZA</span><span><span class="review-name">Zoran Ažić</span><span class="review-role">Vlasnik Mercedesa</span></span></p>
+            <ul class="review-tags" aria-label="Što je popravljeno"><li>Tuča</li><li>Krov</li><li>Hauba</li><li>Branik</li></ul>
+            <a class="text-link review-link" href="/popravak-auta-od-tuce/">Kako popravljamo štetu od tuče</a>
+          </div>
+        </article>
+        <article class="review-panel" id="recenzija-den" role="tabpanel" aria-labelledby="recenzija-tab-den">
+          <p class="review-pull">„Ostah zatečen kako se profesionalno odradilo udubljenje na svim vratima…”</p>
+          <blockquote class="review-full"><p>Ostah zatečen kako se profesionalno odradilo udubljenje na svim vratima i na desnom zadnjem blatobranu. Svaka čast dečki, iznimno sam zadovoljan sa odrađenim. Preporučujem vas i dalje!</p></blockquote>
+          <div class="review-meta">
+            <p class="review-person"><span class="review-initials" aria-hidden="true">DB</span><span><span class="review-name">Den Blažević</span></span></p>
+            <ul class="review-tags" aria-label="Što je popravljeno"><li>Sva vrata</li><li>Stražnji blatobran</li></ul>
+            <a class="text-link review-link" href="/parking-udubljenja-udarci-vratima/">Popravak udubljenja na vratima</a>
+          </div>
+        </article>
+        <article class="review-panel" id="recenzija-sinisa" role="tabpanel" aria-labelledby="recenzija-tab-sinisa">
+          <p class="review-pull">„Automobil kao nov, 100% popravak.”</p>
+          <blockquote class="review-full"><p>Najbolja i najbrža usluga u Zaprešiću, Zagrebu, zasigurno i šire. Potpuna profesionalnost, ljubaznost, susretljivost. Automobil kao nov, 100% popravak. Svaka čast i samo naprijed dalje.</p></blockquote>
+          <div class="review-meta">
+            <p class="review-person"><span class="review-initials" aria-hidden="true">SP</span><span><span class="review-name">Siniša Panjević</span></span></p>
+            <a class="text-link review-link" href="/galerija/">Pogledajte popravke prije i poslije</a>
+          </div>
+        </article>
+        <article class="review-panel" id="recenzija-tomislav" role="tabpanel" aria-labelledby="recenzija-tab-tomislav">
+          <p class="review-pull">„Izuzetno korektan, ljubazan i profesionalan i ultra brz.. Svakako preporučam, i ako ću ikad išta radit, samo kod njega.”</p>
+          <div class="review-meta">
+            <p class="review-person"><span class="review-initials" aria-hidden="true">TM</span><span><span class="review-name">Tomislav Mravunac</span></span></p>
+            <a class="text-link review-link" href="/o-nama/">Upoznajte nas</a>
+          </div>
+        </article>
+        <article class="review-panel" id="recenzija-hrvoje" role="tabpanel" aria-labelledby="recenzija-tab-hrvoje">
+          <p class="review-pull">„Oduševljen obavljenim, sve pohvale! Dok su svi autolimar rekli ne, čovjek kaže da i to i ostvari, vrhunski!”</p>
+          <div class="review-meta">
+            <p class="review-person"><span class="review-initials" aria-hidden="true">HB</span><span><span class="review-name">Hrvoje Benić</span></span></p>
+            <a class="text-link review-link" href="/usluge/">Kako radimo bez lakiranja</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="reviews-side">
+        <div class="reviews-list" role="tablist" aria-label="Recenzije korisnika" aria-orientation="vertical">
+          <button class="reviews-tab" type="button" role="tab" id="recenzija-tab-zoran" aria-controls="recenzija-zoran" aria-selected="true" tabindex="0">
+            <span class="rt-initials" aria-hidden="true">ZA</span><span class="rt-name">Zoran Ažić</span><span class="rt-topic">Tuča: krov, hauba, branik</span>
+          </button>
+          <button class="reviews-tab" type="button" role="tab" id="recenzija-tab-den" aria-controls="recenzija-den" aria-selected="false" tabindex="-1">
+            <span class="rt-initials" aria-hidden="true">DB</span><span class="rt-name">Den Blažević</span><span class="rt-topic">Udubljenja na vratima i blatobranu</span>
+          </button>
+          <button class="reviews-tab" type="button" role="tab" id="recenzija-tab-sinisa" aria-controls="recenzija-sinisa" aria-selected="false" tabindex="-1">
+            <span class="rt-initials" aria-hidden="true">SP</span><span class="rt-name">Siniša Panjević</span><span class="rt-topic">Zaprešić i Zagreb</span>
+          </button>
+          <button class="reviews-tab" type="button" role="tab" id="recenzija-tab-tomislav" aria-controls="recenzija-tomislav" aria-selected="false" tabindex="-1">
+            <span class="rt-initials" aria-hidden="true">TM</span><span class="rt-name">Tomislav Mravunac</span><span class="rt-topic">Korektno i ultra brzo</span>
+          </button>
+          <button class="reviews-tab" type="button" role="tab" id="recenzija-tab-hrvoje" aria-controls="recenzija-hrvoje" aria-selected="false" tabindex="-1">
+            <span class="rt-initials" aria-hidden="true">HB</span><span class="rt-name">Hrvoje Benić</span><span class="rt-topic">Popravak koji su drugi odbili</span>
+          </button>
+        </div>
+        <div class="reviews-cta">
+          <p>Imate sličnu štetu? Procjena je besplatna, a odmah vam kažemo može li se popraviti bez lakiranja.</p>
+          <a class="btn btn-red" href="{{booking}}">Rezerviraj termin</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
